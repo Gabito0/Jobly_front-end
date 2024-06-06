@@ -88,6 +88,7 @@ function App() {
     try {
       let token = await JoblyApi.signup(signupData);
       setToken(token);
+      return { success: true };
     } catch (errors) {
       console.error("signup failed", errors);
       return { success: false, errors };
@@ -102,6 +103,12 @@ function App() {
     try {
       let token = await JoblyApi.login(loginData);
       setToken(token);
+
+      // Wait for currentUser to be set
+      let { username } = jwtDecode(token);
+      JoblyApi.token = token;
+      let currentUser = await JoblyApi.getCurrentUser(username);
+      setCurrentUser(currentUser);
       return { success: true };
     } catch (errors) {
       console.error("login failed", errors);

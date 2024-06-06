@@ -1,7 +1,7 @@
-import { Alert } from "bootstrap";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppAlert from "../common/AppAlert";
+import UserContext from "./UserContext";
 /** Login form
  *
  * Shows form and manages update to state on changes.
@@ -15,12 +15,18 @@ import AppAlert from "../common/AppAlert";
 
 const LoginForm = ({ login }) => {
   const navigate = useNavigate();
+  const { currentUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
   const [formErrors, setFormErrors] = useState([]);
 
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/companies");
+    }
+  }, [currentUser, navigate]);
   console.debug(
     "LoginForm",
     "login=",
@@ -39,9 +45,8 @@ const LoginForm = ({ login }) => {
   async function handleSubmit(evt) {
     evt.preventDefault();
     let result = await login(formData);
-    if (result.success) {
-      navigate("/companies");
-    } else {
+    console.debug("results=", result.success);
+    if (!result.success) {
       setFormErrors(result.errors);
     }
   }
@@ -86,10 +91,7 @@ const LoginForm = ({ login }) => {
                 <AppAlert type="danger" messages={formErrors} />
               ) : null}
 
-              <button
-                className="btn btn-primary float-right mt-3"
-                onSubmit={handleSubmit}
-              >
+              <button className="btn btn-primary float-right mt-3">
                 Submit
               </button>
             </form>

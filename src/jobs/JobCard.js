@@ -50,7 +50,7 @@ const JobCard = ({ id, title, salary, equity, companyName }) => {
           </div>
         )}
         <button
-          className="btn btn-danger font-weight-bold text-uppercase float-right"
+          className="btn btn-danger fw-bold text-uppercase float-end"
           onClick={handleApply}
           disabled={applied}
         >

@@ -27,7 +27,7 @@ const Homepage = () => {
           </h2>
         ) : (
           <p>
-            <Link className="btn btn-primary font-weight-bold mr-3" to="/login">
+            <Link className="btn btn-primary font-weight-bold me-3" to="/login">
               Log in
             </Link>
             <Link className="btn btn-primary font-weight-bold " to="/signup">

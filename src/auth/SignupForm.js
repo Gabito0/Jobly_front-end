@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppAlert from "../common/AppAlert";
+import "./SignupForm.css";
 
 /** Signup form.
  *

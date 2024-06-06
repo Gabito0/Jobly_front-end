@@ -60,7 +60,7 @@ const Navigation = ({ logout }) => {
   }
 
   return (
-    <nav className="Navitagion navbar navbar-expand-md">
+    <nav className="Navigation navbar navbar-expand-md">
       <Link className="navbar-brand" to="/">
         Jobly
       </Link>
